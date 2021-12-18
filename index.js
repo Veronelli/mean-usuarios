@@ -13,7 +13,7 @@ dbConnection();
 app.use(cors());
 app.use(express.json());
 // app.use(Router);
-app.use("/api/auth", Router);
+app.use("/api", Router);
 app.use(express.static("public"));
 
 app.listen(4000, console.log(`Server is ready on port ${PORT}`));

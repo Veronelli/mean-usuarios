@@ -24,7 +24,7 @@ router.post(
 
 router.post("/login", loginUsuario);
 
-router.post(
+router.get(
   "/review",
   [
     check("email", "El email es obligatorio").isEmail(),

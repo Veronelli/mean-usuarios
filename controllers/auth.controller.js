@@ -12,7 +12,8 @@ const crearUsuario = async (req, res = response) => {
     const usuario = await Usuario.findOne({ email });
     if (usuario) {
       return res.json({
-        menssage: "Usuario ya existente",
+        ok: false,
+        message: "Usuario ya existente",
       });
     }
 
@@ -30,6 +31,7 @@ const crearUsuario = async (req, res = response) => {
     console.log(e);
     return res
       .json({
+        ok: false,
         message: "Lol no se puede",
       })
       .status(500);
@@ -37,8 +39,10 @@ const crearUsuario = async (req, res = response) => {
 
   return res
     .json({
-      menssage: `Usuario creado`,
+      ok: true,
+      message: `Usuario creado`,
       nombre,
+      email,
       token,
     })
     .status(200);
@@ -46,7 +50,7 @@ const crearUsuario = async (req, res = response) => {
 
 const loginUsuario = async (req, res = response) => {
   const { email, password } = req.body;
-
+  console.log("Login");
   try {
     const dbUser = await Usuario.findOne({ email });
     if (!dbUser) {
@@ -70,8 +74,10 @@ const loginUsuario = async (req, res = response) => {
 
     return res.json({
       ok: true,
-      menssage: "Login Usuario",
+      message: "Login Usuario",
       nombre: dbUser.nombre,
+      uid: dbUser.id,
+      email: dbUser.email,
       token,
     });
   } catch (e) {
